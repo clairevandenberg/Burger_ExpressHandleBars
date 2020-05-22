@@ -1,0 +1,27 @@
+{
+  "name": "burger_expresshandlebars",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/clairevandeneberg/Burger_ExpressHandleBars.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/clairevandeneberg/Burger_ExpressHandleBars/issues"
+  },
+  "homepage": "https://github.com/clairevandeneberg/Burger_ExpressHandleBars#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-handlebars": "^4.0.4",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.1.0",
+    "save": "^2.4.0",
+    "sequelize": "^5.21.10"
+  }
+}
