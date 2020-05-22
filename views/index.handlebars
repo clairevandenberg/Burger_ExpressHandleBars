@@ -5,11 +5,18 @@
 <h2>Eat Burger</h2>
 
 <ul>
-  {{#each Burger}}
+  {{#each burgers}}
 <p>Burger {{newBurger}}</p>
   {{/each}}
 </ul>
 
+<ul>
+  {{#each burgers}}
+    {{#unless devourer}}
+      {{> burgers/burgers-block devourer=true}}
+    {{/unless}}
+  {{/each}}
+</ul>
 
 <h2>Add a Burger</h2>
 <form class="create-form">
