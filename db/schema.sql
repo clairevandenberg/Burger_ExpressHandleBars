@@ -1,4 +1,4 @@
-### Schema
+DROP DATABASE IF EXISTS burgerlist_db;
 
 CREATE DATABASE burgerlist_db;
 USE burgerlist_db;

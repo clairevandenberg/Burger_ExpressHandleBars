@@ -4,7 +4,7 @@ var db = require("../models");
 module.exports = function(app) {
 
   // GET route for getting all of the Burgers
-  app.get("/api/burgers", function(req, res) {
+  app.get('/', function(req, res) {
     db.Burger.findAll({}).then ( function (results) {
       res.json(results);
     });

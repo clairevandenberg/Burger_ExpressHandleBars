@@ -1,22 +1,30 @@
 {{!-- Setup the index.handlebars to have the template that Handlebars can render onto. --}}
 
 {{!-- Create a button in index.handlebars that will submit the user input into the database. --}}
-<h1>Burger Devourer!</h1>
+<h1>Burger App!</h1>
+
+{{!-- burgers that user lists --}}
 <h2>Eat Burger</h2>
 
 <ul>
-  {{#each burgers}}
-<p>Burger {{newBurger}}</p>
-  {{/each}}
-</ul>
-
-<ul>
-  {{#each burgers}}
-    {{#unless devourer}}
-      {{> burgers/burgers-block devourer=true}}
+  {{#each Burger}}
+    {{#unless burgers}}
+      {{> Burger/burger-block burger=true}}
     {{/unless}}
   {{/each}}
 </ul>
+
+{{!-- burgers that have been devoured --}}
+<h2>Devoured Burgers</h2>
+
+<ul>
+  {{#each Burgers}}
+    {{#if burger}}
+      {{> Burgers/burger-block burger=false}}
+    {{/if}}
+  {{/each}}
+</ul>
+
 
 <h2>Add a Burger</h2>
 <form class="create-form">
