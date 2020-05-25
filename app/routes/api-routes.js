@@ -6,14 +6,30 @@ module.exports = function(app) {
   // GET route for getting all of the Burgers
   app.get('/', function(req, res) {
     db.burgers.findAll({}).then ( function (results) {
-      res.json(results);
+      
+    
+      let burgerData = results.map(function (burger) {
+        return burger.dataValues
+      });
+      console.log(burgerData)
+
+      res.render("index", {burgers: burgerData});
     });
   });
 
   // POST route for saving a new Burgers. We can create a Burgers using the data on req.body
   app.post("/api/burgers", function(req, res) {
-    db.burgers.create({text: req.body.text, complete: req.body.complete}).then (function (results) {
-      res.json(results);
+    console.log(req.body)
+    db.burgers.create({name:req.body.name,devoured:false}).then (function (results) {
+      res.redirect('/');
+    });
+  });
+
+//Devourer Route for saving devoured burgers. Setting it to devoured from not eaten. 
+  app.post("/api/devoured/:id", function(req, res) {
+    console.log(req.params);
+    db.burgers.update({devoured:true}, {where:{id:req.params.id}}).then (function (results) {
+      res.redirect('/');
     });
   });
 
@@ -25,10 +41,8 @@ module.exports = function(app) {
         id: req.params.id
   }
 }).then(function(results){
-  res.json(results);
-    console.log(results)
+  res.redirect('/');
   });
-
   });
 
   // PUT route for updating Burgers. We can access the updated Burgers in req.body
@@ -49,3 +63,4 @@ module.exports = function(app) {
 
   });
 };
+
