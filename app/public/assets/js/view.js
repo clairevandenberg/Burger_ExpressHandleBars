@@ -2,35 +2,35 @@ $(document).ready(function() {
     // Getting a reference to the input field where user adds a new burger
     var $newItemInput = $("input.new-item");
     // Our new burger will go inside the burgerContainer
-    var $burgerContainer = $(".burger-container");
+    var $burgersContainer = $(".burger-container");
     // Adding event listeners for deleting, editing, and adding burger
     $(document).on("click", "button.delete", deleteBurger);
     $(document).on("click", "button.complete", toggleComplete);
-    $(document).on("click", ".burger-item", editBurger);
-    $(document).on("keyup", ".burger-item", finishEdit);
-    $(document).on("blur", ".burger-item", cancelEdit);
-    $(document).on("submit", "#burger-form", insertBurger);
+    $(document).on("click", ".burgers-item", editBurger);
+    $(document).on("keyup", ".burgers-item", finishEdit);
+    $(document).on("blur", ".burgers-item", cancelEdit);
+    $(document).on("submit", "#burgers-form", insertBurger);
   
     // Our initial burger array
     var burger = [];
   
-    // Getting burger from database when page loads
+    // Getting burgers from database when page loads
     getburger();
   
     // This function resets the burger displayed with new burger from the database
     function initializeRows() {
-      $burgerContainer.empty();
+      $burgersContainer.empty();
       var rowsToAdd = [];
-      for (var i = 0; i < burger.length; i++) {
-        rowsToAdd.push(createNewRow(burger[i]));
+      for (var i = 0; i < burgers.length; i++) {
+        rowsToAdd.push(createNewRow(burgers[i]));
       }
-      $burgerContainer.prepend(rowsToAdd);
+      $burgersContainer.prepend(rowsToAdd);
     }
   
     // This function grabs burger from the database and updates the view
     function getBurger() {
-      $.get("/api/burger", function(data) {
-        burger = data;
+      $.get("/api/burgers/", function(data) {
+        burgers = data;
         initializeRows();
       });
     }
@@ -41,13 +41,13 @@ $(document).ready(function() {
       var id = $(this).data("id");
       $.ajax({
         method: "DELETE",
-        url: "/api/burger/" + id
+        url: "/api/burgers/" + id
       }).then(getBurger);
     }
   
     // This function handles showing the input box for a user to edit a burger
     function editBurger() {
-      var currentBurger = $(this).data("burger");
+      var currentBurger = $(this).data("burgers");
       $(this).children().hide();
       $(this).children("input.edit").val(currentBurger.text);
       $(this).children("input.edit").show();
@@ -57,15 +57,15 @@ $(document).ready(function() {
     // Toggles complete status
     function toggleComplete(event) {
       event.stopPropagation();
-      var burger = $(this).parent().data("burger");
-      burger.complete = !burger.complete;
-      updateBurger(burger);
+      var burgers = $(this).parent().data("burgers");
+      burgers.complete = !burgers.complete;
+      updateBurger(burgers);
     }
   
     // This function starts updating a burger in the database if a user hits the "Enter Key"
     // While in edit mode
     function finishEdit(event) {
-      var updatedBurger = $(this).data("burger");
+      var updatedBurger = $(this).data("burgers");
       if (event.which === 13) {
         updatedBurger.text = $(this).children("input").val().trim();
         $(this).blur();
@@ -74,11 +74,11 @@ $(document).ready(function() {
     }
   
     // This function updates a burger in our database
-    function updateBurger(burger) {
+    function updateBurger(burgers) {
       $.ajax({
         method: "PUT",
-        url: "/burger/burger",
-        data: burger
+        url: "/api/burgers/",
+        data: burgers
       }).then(getBurger);
     }
   
@@ -95,12 +95,12 @@ $(document).ready(function() {
     }
   
     // This function constructs a burger-item row
-    function createNewRow(burger) {
+    function createNewRow(burgers) {
       var $newInputRow = $(
         [
-          "<li class='list-group-item burger-item'>",
+          "<li class='list-group-item burgers-item'>",
           "<span>",
-          burger.text,
+          burgers.text,
           "</span>",
           "<input type='text' class='edit' style='display: none;'>",
           "<button class='delete btn btn-danger'>x</button>",
@@ -109,25 +109,24 @@ $(document).ready(function() {
         ].join("")
       );
   
-      $newInputRow.find("button.delete").data("id", burger.id);
+      $newInputRow.find("button.delete").data("id", burgers.id);
       $newInputRow.find("input.edit").css("display", "none");
-      $newInputRow.data("burger", burger);
-      if (burger.complete) {
+      $newInputRow.data("burgers", burgers);
+      if (burgers.complete) {
         $newInputRow.find("span").css("text-decoration", "line-through");
       }
       return $newInputRow;
     }
   
-    // This function inserts a new burger into our database and then updates the view
+    // This function inserts a new burgers into our database and then updates the view
     function insertBurger(event) {
       event.preventDefault();
-      var burger = {
+      var burgers = {
         text: $newItemInput.val().trim(),
         complete: false
       };
   
-      $.post("/api/burger", burger, getBurger);
+      $.post("/api/burgers/", burgers, getBurger);
       $newItemInput.val("");
     }
   });
-  
