@@ -1,11 +1,49 @@
-{{!-- Setup the index.handlebars to have the template that Handlebars can render onto. --}}
+  <!DOCTYPE html>
+<html lang="en">
 
-{{!-- Create a button in index.handlebars that will submit the user input into the database. --}}
-<h1>Burger App!</h1>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Eat-The-Burger</title>
+  <link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="assets/css/burger_style.css" type="text/css" />
+</head>
+
+<body>
+{{!-- title --}}
+<div class="container-fluid" style="background-color:peachpuff";>
+<div class="row">
+      <div class="col-sm-12">
+        <h1>Burger App!</h1>
+</div>
+</div>
+</div>
+
+{{!-- add a burger --}}
+<div class="container-fluid"; style="background-color:lemonchiffon";>
+<div class="row">
+      <div class="col-sm-4">
+<h2>Add a Burger</h2>
+
+<form class="create-form" method="post" action="/api/burgers">
+<div class="form-group">
+<label for="ca">Burger:</label>
+<input type="text" id="ca" name="name">
+
+<button type="submit">Submit</button>
+</form>
+</div>
+</div>
+
 
 {{!-- burgers that user lists --}}
-<h2>Eat Burger</h2>
-
+      <div class="col-sm-4" >
+        
+        <h2>Eat Burger</h2>
 
 <ul>
   {{#each burgers}}
@@ -20,8 +58,12 @@
     {{/unless}}
   {{/each}}
 </ul>
+</div>
+
 
 {{!-- burgers that have been devoured --}}
+
+      <div class="col-sm-4">
 <h2>Devoured Burgers</h2>
 
 <ul>
@@ -32,15 +74,30 @@
     {{/if}}
   {{/each}}
 </ul>
+      </div>
+
+</div>
+</div>
+</div>
+</div>
+<div style="width:100%;height:0;padding-bottom:51%;position:relative;"><iframe 
+src="https://giphy.com/embed/IgOEWPOgK6uVa" 
+width="100%" 
+height="100%" 
+style="position:absolute" 
+frameBorder="0" 
+class="giphy-embed" allowFullScreen></iframe></div><p><a 
+href="https://giphy.com/gifs/life-up-IgOEWPOgK6uVa">via GIPHY</a></p>
 
 
-<h2>Add a Burger</h2>
-<form class="create-form" method="post" action="/api/burgers">
+<footer>
+<div class= "fluid-container"style="background-color:peachpuff";>
+<div class="row">
+<div class="col-sm-12">
+  <p> Made By Claire Vandenebrg, 2020</p>
+</div>
+</div>
+</div>
+</footer>
 
-  <div class="form-group">
-    <label for="ca">Burger:</label>
-    <input type="text" id="ca" name="name">
-  </div>
-
-  <button type="submit">Submit</button>
-  </form>
+</body>
