@@ -21,7 +21,7 @@ module.exports = {
   "production": {
     "username": "admin",
     "password": process.env.TRENT,
-    "database": "musicdb",
+    "database": "CLAIRE_BURGERDB",
     "host": "musicdb-g2.cykqhanvgs0f.ap-southeast-2.rds.amazonaws.com",
     "dialect": "mysql"
   }
