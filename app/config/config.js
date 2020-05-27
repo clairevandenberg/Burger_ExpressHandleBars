@@ -19,10 +19,10 @@ module.exports = {
   },
   
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
+    "username": "admin",
+    "password": process.env.TRENT,
+    "database": "musicdb",
+    "host": "musicdb-g2.cykqhanvgs0f.ap-southeast-2.rds.amazonaws.com",
     "dialect": "mysql"
   }
 }
